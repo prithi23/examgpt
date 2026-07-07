@@ -1,161 +1,229 @@
-/* ===========================================
-   ExamGPT AI
-   Frontend Script
-=========================================== */
-
 const backendURL = "http://127.0.0.1:8000";
 
 /* ===========================
-   DOM Elements
+   Get Elements
 =========================== */
 
 const pdfInput = document.getElementById("pdfFile");
 const browseBtn = document.getElementById("browseBtn");
 const uploadStatus = document.getElementById("uploadStatus");
-const uploadText = document.getElementById("uploadText");
-const uploadIcon = document.getElementById("uploadIcon");
 
 const askBtn = document.getElementById("askBtn");
 const questionInput = document.getElementById("question");
 const chatBox = document.getElementById("chatBox");
 
 const fileName = document.getElementById("fileName");
-const pages = document.getElementById("pages");
-const subject = document.getElementById("subject");
-const university = document.getElementById("university");
 
-const dropArea = document.getElementById("dropArea");
+const uploadMenu = document.getElementById("uploadMenu");
+const chatMenu = document.getElementById("chatMenu");
+const detailsMenu = document.getElementById("detailsMenu");
+const searchMenu = document.getElementById("searchMenu");
+
+const statusDot = document.getElementById("statusDot");
+const statusText = document.getElementById("statusText");
+
+/* ===========================
+   Backend Status
+=========================== */
+
+async function checkBackend() {
+
+    try {
+
+        const response = await fetch(backendURL);
+
+        if (response.ok) {
+
+            statusDot.style.background = "#22c55e";
+
+            statusText.innerHTML = "Backend Connected";
+
+        } else {
+
+            statusDot.style.background = "#ef4444";
+
+            statusText.innerHTML = "Backend Offline";
+
+        }
+
+    }
+
+    catch {
+
+        statusDot.style.background = "#ef4444";
+
+        statusText.innerHTML = "Backend Offline";
+
+    }
+
+}
+
+checkBackend();
+
+setInterval(checkBackend,5000);
+
+/* ===========================
+   Sidebar Navigation
+=========================== */
+
+function removeActiveMenu(){
+
+    document.querySelectorAll(".menu-btn").forEach(btn=>{
+
+        btn.classList.remove("active");
+
+    });
+
+}
+
+uploadMenu.onclick=function(){
+
+    removeActiveMenu();
+
+    uploadMenu.classList.add("active");
+
+    document.getElementById("uploadSection").scrollIntoView({
+
+        behavior:"smooth"
+
+    });
+
+};
+
+chatMenu.onclick=function(){
+
+    removeActiveMenu();
+
+    chatMenu.classList.add("active");
+
+    document.getElementById("chatSection").scrollIntoView({
+
+        behavior:"smooth"
+
+    });
+
+};
+
+detailsMenu.onclick=function(){
+
+    removeActiveMenu();
+
+    detailsMenu.classList.add("active");
+
+    document.getElementById("detailsSection").scrollIntoView({
+
+        behavior:"smooth"
+
+    });
+
+};
+
+searchMenu.onclick=function(){
+
+    removeActiveMenu();
+
+    searchMenu.classList.add("active");
+
+    document.getElementById("chatSection").scrollIntoView({
+
+        behavior:"smooth"
+
+    });
+
+    questionInput.focus();
+
+};
 
 /* ===========================
    Browse Button
 =========================== */
 
-browseBtn.addEventListener("click", () => {
+browseBtn.onclick=function(){
 
     pdfInput.click();
 
-});
+};
 
+pdfInput.addEventListener("change",uploadPDF);
 /* ===========================
-   File Select
-=========================== */
-
-pdfInput.addEventListener("change", () => {
-
-    if(pdfInput.files.length>0){
-
-        uploadPDF(pdfInput.files[0]);
-
-    }
-
-});
-
-/* ===========================
-   Drag & Drop
-=========================== */
-
-dropArea.addEventListener("dragover",(e)=>{
-
-    e.preventDefault();
-
-    dropArea.style.borderColor="#3b82f6";
-
-});
-
-dropArea.addEventListener("dragleave",()=>{
-
-    dropArea.style.borderColor="rgba(255,255,255,.25)";
-
-});
-
-dropArea.addEventListener("drop",(e)=>{
-
-    e.preventDefault();
-
-    dropArea.style.borderColor="rgba(255,255,255,.25)";
-
-    if(e.dataTransfer.files.length>0){
-
-        uploadPDF(e.dataTransfer.files[0]);
-
-    }
-
-});
-/* ===========================================
    Upload PDF
-=========================================== */
+=========================== */
 
-async function uploadPDF(file){
+async function uploadPDF() {
+
+    if (pdfInput.files.length === 0)
+        return;
+
+    const file = pdfInput.files[0];
 
     uploadStatus.innerHTML = `
-        <div class="success-card" style="background:#2563eb;">
-            <h3>Uploading PDF...</h3>
-            <p>Please wait while ExamGPT processes your question paper.</p>
+        <div style="
+            background:#2563eb;
+            color:white;
+            padding:15px;
+            border-radius:10px;
+            margin-top:20px;
+        ">
+            ⏳ Uploading PDF...
         </div>
     `;
 
-    fileName.textContent = file.name;
+    fileName.innerHTML = file.name;
 
     const formData = new FormData();
 
     formData.append("file", file);
 
-    try{
+    try {
 
-        const response = await fetch(`${backendURL}/upload`,{
+        const response = await fetch(`${backendURL}/upload`, {
 
-            method:"POST",
+            method: "POST",
 
-            body:formData
+            body: formData
 
         });
 
         const data = await response.json();
 
-        if(data.success){
+        if (data.success) {
 
-            /* Change Upload Box */
-
-            uploadIcon.src="assets/pdf.png";
-
-            uploadText.innerHTML=`
-                <b>${data.filename}</b><br>
-                <span style="color:#22c55e;">
-                    PDF Uploaded Successfully
-                </span>
+            uploadStatus.innerHTML = `
+                <div style="
+                    background:#16a34a;
+                    color:white;
+                    padding:18px;
+                    border-radius:12px;
+                    margin-top:20px;
+                    font-size:16px;
+                    line-height:28px;
+                ">
+                    ✅ <b>Upload Successful</b><br>
+                    <b>File :</b> ${data.filename}<br>
+                    <b>Status :</b> ${data.message}<br>
+                    <b>Chunks Created :</b> ${data.chunks}
+                </div>
             `;
 
-            /* Success Card */
+            document.getElementById("fileName").innerHTML = data.filename;
 
-            uploadStatus.innerHTML=`
+            document.getElementById("uploadText").innerHTML =
+                "✅ " + data.filename;
 
-            <div class="success-card">
-
-                <h3>✅ Upload Successful</h3>
-
-                <p><strong>File :</strong> ${data.filename}</p>
-
-                <p><strong>Chunks :</strong> ${data.chunks}</p>
-
-                <p>Your PDF is ready for AI questions.</p>
-
-            </div>
-
-            `;
-
-            /* PDF Details */
-
-            fileName.textContent=data.filename;
-
-            pages.textContent="Detected";
-
-            subject.textContent="Computer Networks";
-
-            university.textContent="Anna University";
+            document.getElementById("uploadIcon").src =
+                "assets/pdf.png";
 
             addBotMessage(
-                "✅ PDF uploaded successfully.<br><br>You can now ask me anything about this question paper."
+                "✅ PDF uploaded successfully.<br><br>You can now ask questions from this PDF."
             );
+
+            // Hide after 2 minutes
+
+            setTimeout(function(){
+
+                uploadStatus.innerHTML="";
+
+            },120000);
 
         }
 
@@ -163,13 +231,17 @@ async function uploadPDF(file){
 
             uploadStatus.innerHTML=`
 
-            <div class="success-card" style="background:#dc2626;">
+                <div style="
+                    background:#dc2626;
+                    color:white;
+                    padding:15px;
+                    border-radius:10px;
+                    margin-top:20px;
+                ">
 
-                <h3>Upload Failed</h3>
+                    ❌ Upload Failed
 
-                <p>Please try again.</p>
-
-            </div>
+                </div>
 
             `;
 
@@ -181,28 +253,32 @@ async function uploadPDF(file){
 
         uploadStatus.innerHTML=`
 
-        <div class="success-card" style="background:#dc2626;">
+            <div style="
+                background:#dc2626;
+                color:white;
+                padding:15px;
+                border-radius:10px;
+                margin-top:20px;
+            ">
 
-            <h3>Backend Offline</h3>
+                ❌ Cannot connect to Backend
 
-            <p>Cannot connect to FastAPI Server.</p>
-
-        </div>
+            </div>
 
         `;
 
     }
 
 }
-/* ===========================================
+/* ===========================
    Ask AI
-=========================================== */
+=========================== */
 
-askBtn.addEventListener("click", askQuestion);
+askBtn.onclick = askQuestion;
 
 questionInput.addEventListener("keypress", function(e){
 
-    if(e.key==="Enter"){
+    if(e.key === "Enter"){
 
         askQuestion();
 
@@ -214,12 +290,12 @@ async function askQuestion(){
 
     const question = questionInput.value.trim();
 
-    if(question==="")
+    if(question === "")
         return;
 
     addUserMessage(question);
 
-    questionInput.value="";
+    questionInput.value = "";
 
     showTyping();
 
@@ -230,7 +306,9 @@ async function askQuestion(){
             method:"POST",
 
             headers:{
+
                 "Content-Type":"application/json"
+
             },
 
             body:JSON.stringify({
@@ -253,23 +331,23 @@ async function askQuestion(){
 
         removeTyping();
 
-        addBotMessage("❌ Cannot connect to the backend server.");
+        addBotMessage("❌ Backend connection failed.");
 
     }
 
 }
 
-/* ===========================================
+/* ===========================
    User Message
-=========================================== */
+=========================== */
 
 function addUserMessage(message){
 
-    const div=document.createElement("div");
+    const div = document.createElement("div");
 
-    div.className="user-message";
+    div.className = "user-message";
 
-    div.innerHTML=message;
+    div.innerHTML = message;
 
     chatBox.appendChild(div);
 
@@ -277,17 +355,17 @@ function addUserMessage(message){
 
 }
 
-/* ===========================================
+/* ===========================
    Bot Message
-=========================================== */
+=========================== */
 
 function addBotMessage(message){
 
-    const div=document.createElement("div");
+    const div = document.createElement("div");
 
-    div.className="bot-message";
+    div.className = "bot-message";
 
-    div.innerHTML=message;
+    div.innerHTML = message;
 
     chatBox.appendChild(div);
 
@@ -295,19 +373,19 @@ function addBotMessage(message){
 
 }
 
-/* ===========================================
+/* ===========================
    Typing Animation
-=========================================== */
+=========================== */
 
 function showTyping(){
 
-    const div=document.createElement("div");
+    const div = document.createElement("div");
 
-    div.className="bot-message";
+    div.className = "bot-message";
 
-    div.id="typing";
+    div.id = "typing";
 
-    div.innerHTML=`
+    div.innerHTML = `
 
         <div class="typing">
 
@@ -329,7 +407,7 @@ function showTyping(){
 
 function removeTyping(){
 
-    const typing=document.getElementById("typing");
+    const typing = document.getElementById("typing");
 
     if(typing){
 
@@ -339,24 +417,12 @@ function removeTyping(){
 
 }
 
-/* ===========================================
+/* ===========================
    Auto Scroll
-=========================================== */
+=========================== */
 
 function scrollBottom(){
 
-    chatBox.scrollTop=chatBox.scrollHeight;
+    chatBox.scrollTop = chatBox.scrollHeight;
 
 }
-
-/* ===========================================
-   Welcome Message
-=========================================== */
-
-window.onload=function(){
-
-    addBotMessage(
-        "👋 Welcome to ExamGPT! Upload a PDF question paper and ask me anything about it."
-    );
-
-};

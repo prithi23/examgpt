@@ -4,6 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>ExamGPT AI Assistant</title>
@@ -26,9 +27,11 @@
 
     <aside class="sidebar">
 
+        <!-- Logo -->
+
         <div class="logo">
 
-            <img src="assets/logo.png" alt="Logo">
+            <img src="assets/logo.png" alt="ExamGPT Logo">
 
             <div>
 
@@ -40,35 +43,37 @@
 
         </div>
 
+        <!-- Navigation -->
+
         <div class="menu">
 
-            <button class="menu-btn active">
+            <button class="menu-btn active" id="uploadMenu">
 
-                <img src="assets/upload.png">
+                <img src="assets/upload.png" class="menu-icon">
 
                 <span>Upload PDF</span>
 
             </button>
 
-            <button class="menu-btn">
+            <button class="menu-btn" id="chatMenu">
 
-                <img src="assets/chat.png">
+                <img src="assets/chat.png" class="menu-icon">
 
                 <span>AI Chat</span>
 
             </button>
 
-            <button class="menu-btn">
+            <button class="menu-btn" id="detailsMenu">
 
-                <img src="assets/pdf.png">
+                <img src="assets/pdf.png" class="menu-icon">
 
                 <span>PDF Details</span>
 
             </button>
 
-            <button class="menu-btn">
+            <button class="menu-btn" id="searchMenu">
 
-                <img src="assets/search.png">
+                <img src="assets/search.png" class="menu-icon">
 
                 <span>Search</span>
 
@@ -76,25 +81,29 @@
 
         </div>
 
+        <!-- Bottom Status -->
+
         <div class="sidebar-bottom">
 
-    <h3>System Status</h3>
+            <h3>System Status</h3>
 
-    <div class="status">
+            <div class="status">
 
-        <span id="statusDot" class="dot"></span>
+                <span id="statusDot" class="dot"></span>
 
-        <span id="statusText">Checking...</span>
+                <span id="statusText">Checking...</span>
 
-    </div>
+            </div>
 
-</div>
+        </div>
 
     </aside>
 
     <!-- ================= Main ================= -->
 
     <main class="main">
+
+        <!-- Navbar -->
 
         <header class="navbar">
 
@@ -103,7 +112,9 @@
                 <h1>ExamGPT AI</h1>
 
                 <p>
+
                     Upload an Anna University Question Paper and ask anything about it.
+
                 </p>
 
             </div>
@@ -112,9 +123,8 @@
 
         <!-- ================= Upload Card ================= -->
 
-        <section class="upload-card">
-
-            <h2>Upload Question Paper</h2>
+        <section class="upload-card" id="uploadSection">
+                        <h2>Upload Question Paper</h2>
 
             <div class="upload-box" id="dropArea">
 
@@ -124,11 +134,15 @@
                     alt="Upload">
 
                 <h3 id="uploadText">
+
                     Drag & Drop PDF Here
+
                 </h3>
 
                 <p>
-                    Supported format: PDF
+
+                    Supported Format: PDF
+
                 </p>
 
                 <input
@@ -153,7 +167,7 @@
 
         <!-- ================= PDF Details ================= -->
 
-        <section class="details-card">
+        <section class="details-card" id="detailsSection">
 
             <h2>PDF Details</h2>
 
@@ -161,7 +175,7 @@
 
                 <div class="detail">
 
-                    <img src="assets/pdf.png">
+                    <img src="assets/pdf.png" alt="PDF">
 
                     <div>
 
@@ -234,11 +248,11 @@
             </div>
 
         </section>
-                <!-- ================= AI Chat ================= -->
 
-        <section class="chat-card">
+        <!-- ================= AI Chat ================= -->
 
-            <div class="chat-header">
+        <section class="chat-card" id="chatSection">
+                        <div class="chat-header">
 
                 <div class="chat-title">
 
