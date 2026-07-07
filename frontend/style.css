@@ -1,0 +1,874 @@
+/* ================================================= */
+/*                    ExamGPT AI                      */
+/*                Modern Glass UI Theme              */
+/* ================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:linear-gradient(135deg,#0f172a,#1e293b,#1d4ed8);
+
+    color:white;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+}
+
+.app{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+/* ================= Sidebar ================= */
+
+.sidebar{
+
+    width:280px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    border-right:1px solid rgba(255,255,255,.15);
+
+    padding:30px;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:50px;
+
+}
+
+.logo img{
+
+    width:60px;
+
+    height:60px;
+
+}
+
+.logo h2{
+
+    font-size:28px;
+
+    margin-bottom:5px;
+
+}
+
+.logo p{
+
+    color:#cbd5e1;
+
+    font-size:14px;
+
+}
+
+.menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    margin-top:10px;
+
+}
+
+.menu-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:16px;
+
+    border:none;
+
+    cursor:pointer;
+
+    border-radius:15px;
+
+    background:rgba(255,255,255,.06);
+
+    color:white;
+
+    transition:.35s;
+
+}
+
+.menu-btn img{
+
+    width:28px;
+
+    height:28px;
+
+}
+
+.menu-btn:hover{
+
+    background:#2563eb;
+
+    transform:translateX(8px);
+
+}
+
+.menu-btn.active{
+
+    background:#2563eb;
+
+}
+
+.sidebar-bottom{
+
+    margin-top:auto;
+
+    
+    padding:30px;
+
+    border-radius:15px;
+
+}
+
+.sidebar-bottom h3{
+
+    margin-bottom:15px;
+
+}
+
+.sidebar{
+
+    
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+}
+
+.dot{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    background:orange;
+
+    display:inline-block;
+
+    margin-right:10px;
+
+    box-shadow:0 0 10px currentColor;
+
+}
+/* ================= Main ================= */
+
+.main{
+
+    flex:1;
+
+    padding:35px;
+
+}
+
+.navbar{
+
+    margin-bottom:35px;
+
+}
+
+.navbar h1{
+
+    font-size:38px;
+
+    margin-bottom:8px;
+
+}
+
+.navbar p{
+
+    color:#cbd5e1;
+
+}
+
+/* ================= Cards ================= */
+
+.upload-card,
+.details-card,
+.chat-card{
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    margin-bottom:30px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+
+    transition:.35s;
+
+}
+
+.upload-card:hover,
+.details-card:hover,
+.chat-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 25px 50px rgba(0,0,0,.35);
+
+}
+
+.upload-card h2,
+.details-card h2,
+.chat-card h2{
+
+    margin-bottom:20px;
+
+}/* ================================================= */
+/*                  Upload Section                    */
+/* ================================================= */
+
+.upload-box{
+
+    border:3px dashed rgba(255,255,255,.25);
+
+    border-radius:22px;
+
+    padding:60px;
+
+    text-align:center;
+
+    transition:.35s;
+
+    cursor:pointer;
+
+    background:rgba(255,255,255,.03);
+
+}
+
+.upload-box:hover{
+
+    border-color:#3b82f6;
+
+    background:rgba(59,130,246,.08);
+
+    transform:scale(1.01);
+
+}
+
+.upload-box img{
+
+    width:95px;
+
+    margin-bottom:20px;
+
+}
+
+.upload-box h3{
+
+    font-size:26px;
+
+    margin-bottom:10px;
+
+}
+
+.upload-box p{
+
+    color:#cbd5e1;
+
+    margin-bottom:25px;
+
+}
+
+.upload-box button{
+
+    border:none;
+
+    cursor:pointer;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:15px 40px;
+
+    font-size:17px;
+
+    border-radius:12px;
+
+    transition:.3s;
+
+}
+
+.upload-box button:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+}
+
+/* ================= Upload Status ================= */
+
+#uploadStatus{
+
+    margin-top:25px;
+
+}
+
+/* ================= Success Card ================= */
+
+.success-card{
+
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+
+    padding:22px;
+
+    border-radius:18px;
+
+    color:white;
+
+    animation:fadeUp .4s ease;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.25);
+
+}
+
+.success-card h3{
+
+    margin-bottom:12px;
+
+    font-size:22px;
+
+}
+
+.success-card p{
+
+    margin:8px 0;
+
+    line-height:1.6;
+
+}
+
+/* ================================================= */
+/*                  PDF Details                       */
+/* ================================================= */
+
+.details-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+.detail{
+
+    background:rgba(255,255,255,.05);
+
+    border-radius:18px;
+
+    padding:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    transition:.3s;
+
+}
+
+.detail:hover{
+
+    background:rgba(255,255,255,.10);
+
+    transform:translateY(-4px);
+
+}
+
+.detail img{
+
+    width:55px;
+
+    height:55px;
+
+}
+
+.detail h4{
+
+    margin-bottom:6px;
+
+}
+
+.detail p{
+
+    color:#cbd5e1;
+
+}
+
+/* ================================================= */
+/*                  Animations                        */
+/* ================================================= */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        transform:scale(1.4);
+
+        opacity:.5;
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+/* ================================================= */
+/*                  Chat Section                      */
+/* ================================================= */
+
+.chat-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.chat-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.chat-title img{
+
+    width:45px;
+
+    height:45px;
+
+}
+
+.chat-title h2{
+
+    margin:0;
+
+}
+
+.chat-title p{
+
+    color:#cbd5e1;
+
+    font-size:14px;
+
+}
+
+.chat-status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:14px;
+
+    color:#22c55e;
+
+}
+
+.status-dot{
+
+    width:10px;
+
+    height:10px;
+
+    background:#22c55e;
+
+    border-radius:50%;
+
+    animation:pulse 1.5s infinite;
+
+}
+
+/* ================================================= */
+/*                  Chat Box                          */
+/* ================================================= */
+
+.chat-box{
+
+    height:500px;
+
+    overflow-y:auto;
+
+    background:rgba(255,255,255,.04);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    margin-bottom:20px;
+
+    scroll-behavior:smooth;
+
+}
+
+.chat-box::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.chat-box::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
+    border-radius:20px;
+
+}
+
+.chat-box::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+/* ================================================= */
+/*                 Messages                           */
+/* ================================================= */
+
+.user-message{
+
+    align-self:flex-end;
+
+    max-width:75%;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:15px 18px;
+
+    border-radius:20px 20px 5px 20px;
+
+    line-height:1.7;
+
+    animation:fadeUp .3s;
+
+    word-break:break-word;
+
+}
+
+.bot-message{
+
+    align-self:flex-start;
+
+    max-width:75%;
+
+    background:white;
+
+    color:#1e293b;
+
+    padding:15px 18px;
+
+    border-radius:20px 20px 20px 5px;
+
+    line-height:1.7;
+
+    animation:fadeUp .3s;
+
+    word-break:break-word;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+}
+
+/* ================================================= */
+/*                  Chat Input                        */
+/* ================================================= */
+
+.chat-input{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.chat-input input{
+
+    flex:1;
+
+    padding:16px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    background:white;
+
+}
+
+.chat-input button{
+
+    width:160px;
+
+    border:none;
+
+    cursor:pointer;
+
+    background:#2563eb;
+
+    color:white;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+.chat-input button:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+}
+
+/* ================================================= */
+/*                 Typing Animation                   */
+/* ================================================= */
+
+.typing{
+
+    display:flex;
+
+    gap:6px;
+
+}
+
+.typing span{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    animation:bounce 1s infinite;
+
+}
+
+.typing span:nth-child(2){
+
+    animation-delay:.2s;
+
+}
+
+.typing span:nth-child(3){
+
+    animation-delay:.4s;
+
+}
+
+@keyframes bounce{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ================================================= */
+/*                    Footer                          */
+/* ================================================= */
+
+.footer{
+
+    margin-top:30px;
+
+    text-align:center;
+
+    color:#cbd5e1;
+
+    font-size:14px;
+
+}
+
+/* ================================================= */
+/*                  Responsive                        */
+/* ================================================= */
+
+@media(max-width:1000px){
+
+    .app{
+
+        flex-direction:column;
+
+    }
+
+    .sidebar{
+
+        width:100%;
+
+    }
+
+    .details-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .navbar h1{
+
+        font-size:28px;
+
+    }
+
+    .upload-box{
+
+        padding:35px;
+
+    }
+
+    .chat-box{
+
+        height:380px;
+
+    }
+
+    .chat-input{
+
+        flex-direction:column;
+
+    }
+
+    .chat-input button{
+
+        width:100%;
+
+    }
+
+    .bot-message,
+
+    .user-message{
+
+        max-width:95%;
+
+    }
+
+}

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ExamGPT AI Assistant</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= Sidebar ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <img src="assets/logo.png" alt="Logo">
+
+            <div>
+
+                <h2>ExamGPT</h2>
+
+                <p>AI Question Analyzer</p>
+
+            </div>
+
+        </div>
+
+        <div class="menu">
+
+            <button class="menu-btn active">
+
+                <img src="assets/upload.png">
+
+                <span>Upload PDF</span>
+
+            </button>
+
+            <button class="menu-btn">
+
+                <img src="assets/chat.png">
+
+                <span>AI Chat</span>
+
+            </button>
+
+            <button class="menu-btn">
+
+                <img src="assets/pdf.png">
+
+                <span>PDF Details</span>
+
+            </button>
+
+            <button class="menu-btn">
+
+                <img src="assets/search.png">
+
+                <span>Search</span>
+
+            </button>
+
+        </div>
+
+        <div class="sidebar-bottom">
+
+    <h3>System Status</h3>
+
+    <div class="status">
+
+        <span id="statusDot" class="dot"></span>
+
+        <span id="statusText">Checking...</span>
+
+    </div>
+
+</div>
+
+    </aside>
+
+    <!-- ================= Main ================= -->
+
+    <main class="main">
+
+        <header class="navbar">
+
+            <div>
+
+                <h1>ExamGPT AI</h1>
+
+                <p>
+                    Upload an Anna University Question Paper and ask anything about it.
+                </p>
+
+            </div>
+
+        </header>
+
+        <!-- ================= Upload Card ================= -->
+
+        <section class="upload-card">
+
+            <h2>Upload Question Paper</h2>
+
+            <div class="upload-box" id="dropArea">
+
+                <img
+                    src="assets/upload.png"
+                    id="uploadIcon"
+                    alt="Upload">
+
+                <h3 id="uploadText">
+                    Drag & Drop PDF Here
+                </h3>
+
+                <p>
+                    Supported format: PDF
+                </p>
+
+                <input
+                    type="file"
+                    id="pdfFile"
+                    accept=".pdf"
+                    hidden>
+
+                <button
+                    id="browseBtn"
+                    type="button">
+
+                    Browse PDF
+
+                </button>
+
+            </div>
+
+            <div id="uploadStatus"></div>
+
+        </section>
+
+        <!-- ================= PDF Details ================= -->
+
+        <section class="details-card">
+
+            <h2>PDF Details</h2>
+
+            <div class="details-grid">
+
+                <div class="detail">
+
+                    <img src="assets/pdf.png">
+
+                    <div>
+
+                        <h4>File Name</h4>
+
+                        <p id="fileName">
+
+                            -
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="detail">
+
+                    📄
+
+                    <div>
+
+                        <h4>Pages</h4>
+
+                        <p id="pages">
+
+                            -
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="detail">
+
+                    📚
+
+                    <div>
+
+                        <h4>Subject</h4>
+
+                        <p id="subject">
+
+                            Computer Networks
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="detail">
+
+                    🏫
+
+                    <div>
+
+                        <h4>University</h4>
+
+                        <p id="university">
+
+                            Anna University
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+                <!-- ================= AI Chat ================= -->
+
+        <section class="chat-card">
+
+            <div class="chat-header">
+
+                <div class="chat-title">
+
+                    <img src="assets/chat.png" alt="Chat">
+
+                    <div>
+
+                        <h2>ExamGPT Assistant</h2>
+
+                        <p>Ask anything from the uploaded PDF</p>
+
+                    </div>
+
+                </div>
+
+                <div class="chat-status">
+
+                    <span class="status-dot"></span>
+
+                    AI Online
+
+                </div>
+
+            </div>
+
+            <div class="chat-box" id="chatBox">
+
+                <div class="bot-message">
+
+                    <strong>👋 Welcome to ExamGPT!</strong>
+
+                    <br><br>
+
+                    Upload your PDF question paper and ask questions like:
+
+                    <br><br>
+
+                    • Explain Routing
+
+                    <br>
+
+                    • What is TCP/IP?
+
+                    <br>
+
+                    • Give important 16-mark questions
+
+                    <br>
+
+                    • Summarize this paper
+
+                    <br>
+
+                    • Which units are covered?
+
+                </div>
+
+            </div>
+
+            <div class="chat-input">
+
+                <input
+                    type="text"
+                    id="question"
+                    placeholder="Ask anything about the uploaded PDF...">
+
+                <button
+                    id="askBtn"
+                    type="button">
+
+                    Ask AI
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- ================= Footer ================= -->
+
+        <footer class="footer">
+
+            <p>
+
+                © 2026 ExamGPT • AI Powered Question Paper Analyzer
+
+            </p>
+
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
